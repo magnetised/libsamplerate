@@ -125,7 +125,7 @@ callback_test (int converter, double src_ratio)
 	do
 	{	/* We will be throwing away output data, so just grab as much as possible. */
 		read_count = ARRAY_LEN (output) / test_callback_data.channels ;
-		read_count = src_callback_read (src_state, src_ratio, read_count, output) ;
+		read_count = src_callback_read (src_state, src_ratio, read_count, output, NULL) ;
 		read_total += read_count ;
 		}
 	while (read_count > 0) ;
@@ -220,7 +220,7 @@ end_of_stream_test (int converter)
 	do
 	{	/* We will be throwing away output data, so just grab as much as possible. */
 		read_count = ARRAY_LEN (output) / test_callback_data.channels ;
-		read_count = src_callback_read (src_state, src_ratio, read_count, output) ;
+		read_count = src_callback_read (src_state, src_ratio, read_count, output, NULL) ;
 		read_total += read_count ;
 		}
 	while (read_count > 0) ;

@@ -219,7 +219,7 @@ varispeed_get_data (SRC_CB_DATA *data, float *samples, int out_frames)
 
 		output = samples + out_frame_count * data->sf.sfinfo.channels ;
 
-		if ((rc = src_callback_read (data->src_state, src_ratio, VARISPEED_BLOCK_LEN, output)) < VARISPEED_BLOCK_LEN)
+		if ((rc = src_callback_read (data->src_state, src_ratio, VARISPEED_BLOCK_LEN, output, NULL)) < VARISPEED_BLOCK_LEN)
 		{	printf ("\nError : src_callback_read short output (%d instead of %d)\n\n", rc, VARISPEED_BLOCK_LEN) ;
 			exit (1) ;
 			} ;

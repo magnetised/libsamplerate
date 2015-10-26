@@ -183,7 +183,7 @@ callback_reset_test (int converter)
 	read_total = 0 ;
 	do
 	{	read_count = (ARRAY_LEN (output) - read_total > CB_READ_LEN) ? CB_READ_LEN : ARRAY_LEN (output) - read_total ;
-		read_count = src_callback_read (src_state, src_ratio, read_count, output + read_total) ;
+		read_count = src_callback_read (src_state, src_ratio, read_count, output + read_total, NULL) ;
 		read_total += read_count ;
 		}
 	while (read_count > 0) ;
@@ -207,7 +207,7 @@ callback_reset_test (int converter)
 	read_total = 0 ;
 	do
 	{	read_count = (ARRAY_LEN (output) - read_total > CB_READ_LEN) ? CB_READ_LEN : ARRAY_LEN (output) - read_total ;
-		read_count = src_callback_read (src_state, src_ratio, read_count, output + read_total) ;
+		read_count = src_callback_read (src_state, src_ratio, read_count, output + read_total, NULL) ;
 		read_total += read_count ;
 		}
 	while (read_count > 0) ;

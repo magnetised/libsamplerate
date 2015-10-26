@@ -174,12 +174,13 @@ src_process (SRC_STATE *state, SRC_DATA *data)
 } /* src_process */
 
 long
-src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data)
+src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data, long *_input_frames_used)
 {	SRC_PRIVATE	*psrc ;
 	SRC_DATA	src_data ;
 
-	long	output_frames_gen ;
+	long	output_frames_gen, input_frames_used ;
 	int		error = 0 ;
+
 
 	if (state == NULL)
 		return 0 ;
@@ -216,6 +217,7 @@ src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data)
 	src_data.input_frames = psrc->saved_frames ;
 
 	output_frames_gen = 0 ;
+	input_frames_used = 0 ;
 	while (output_frames_gen < frames)
 	{	/*	Use a dummy array for the case where the callback function
 		**	returns without setting the ptr.
@@ -247,9 +249,11 @@ src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data)
 		src_data.data_in += src_data.input_frames_used * psrc->channels ;
 		src_data.input_frames -= src_data.input_frames_used ;
 
+
 		src_data.data_out += src_data.output_frames_gen * psrc->channels ;
 		src_data.output_frames -= src_data.output_frames_gen ;
 
+		input_frames_used += src_data.input_frames_used;
 		output_frames_gen += src_data.output_frames_gen ;
 
 		if (src_data.end_of_input == SRC_TRUE && src_data.output_frames_gen == 0)
@@ -262,6 +266,10 @@ src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data)
 	if (error != 0)
 	{	psrc->error = error ;
 	 	return 0 ;
+		} ;
+
+	if (_input_frames_used != NULL)
+	{ *_input_frames_used = input_frames_used ;
 		} ;
 
 	return output_frames_gen ;

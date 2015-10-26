@@ -331,7 +331,7 @@ callback_test (int converter, int channel_count, double target_snr)
 
 	read_total = 0 ;
 	while (read_total < frames)
-	{	read_count = src_callback_read (src_state, src_ratio, frames - read_total, output_interleaved + read_total * channel_count) ;
+	{	read_count = src_callback_read (src_state, src_ratio, frames - read_total, output_interleaved + read_total * channel_count, NULL) ;
 
 		if (read_count <= 0)
 			break ;

@@ -99,7 +99,7 @@ int src_process (SRC_STATE *state, SRC_DATA *data) ;
 **	Callback based processing function. Read up to frames worth of data from
 **	the converter int *data and return frames read or -1 on error.
 */
-long src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data) ;
+long src_callback_read (SRC_STATE *state, double src_ratio, long frames, float *data, long *input_frames_used) ;
 
 /*
 **	Simple interface for performing a single conversion from input buffer to

@@ -89,7 +89,7 @@ callback_hang_test (int converter)
 	for (k = 0 ; k < ARRAY_LEN (pairs) ; k++)
 	{	alarm (1) ;
 		src_ratio = pairs [k].ratio ;
-		src_callback_read (src_state, src_ratio, pairs [k].count, output) ;
+		src_callback_read (src_state, src_ratio, pairs [k].count, output, NULL) ;
 		} ;
 
 	src_state = src_delete (src_state) ;
